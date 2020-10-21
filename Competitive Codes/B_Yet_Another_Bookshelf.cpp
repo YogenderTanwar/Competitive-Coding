@@ -12,49 +12,44 @@ using namespace std;
 #define MOD 1000000007
 const ll inf = 1e18;
 ll power(ll a, ll b);
-ll dp[300005];
-#define N 300000
+ll a[100];
 
-void solve()
-{
-    for(ll i=1;i<=300000;i++) dp[i]=inf;
-    dp[1]=2;
-    for(ll i=2;i<=N;i++)
-    {
-        for(ll j=i;j<=N;j+=i)
-        {
-            dp[j]=min(dp[j],i+j/i);
-        }
-
-    }
-
-    for(ll i=1;i<=N;i++)
-    {
-         for(ll j=1;j*j<=i;j++)
-         {
-              dp[i]=min(dp[i],dp[j]+dp[i-j]);
-         }
-    }
-
-}
 
 int main()
 {
     fast
     ll t = 1; 
     cin >> t;
-    solve();
-
     while (t--)
     {
-        ll n,k,x;
-        cin>>n>>k>>x;
-       // cout<<dp[k]<<endl;
+        ll n;
+        cin>>n;
+        ll l=-1,r=-1;
 
-        if(dp[k]<=n) cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
+        for(ll i=1;i<=n;i++) 
+        {
+            cin>>a[i];
+            if(a[i]==1)
+            {
+                 if(l==-1) l=i;
+                 else r=i;
 
+            }
 
+        }
+
+        if(r==-1) cout<<"0"<<endl;
+        else {
+      ll ans=0;
+
+            for(ll i=l;i<=r;i++) 
+            {
+                if(a[i]==0) ans++;
+
+            }
+            cout<<ans<<endl;
+            
+        }
         
     }
 return 0;

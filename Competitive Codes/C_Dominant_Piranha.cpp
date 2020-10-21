@@ -12,49 +12,47 @@ using namespace std;
 #define MOD 1000000007
 const ll inf = 1e18;
 ll power(ll a, ll b);
-ll dp[300005];
-#define N 300000
+ll a[300005];
 
-void solve()
-{
-    for(ll i=1;i<=300000;i++) dp[i]=inf;
-    dp[1]=2;
-    for(ll i=2;i<=N;i++)
-    {
-        for(ll j=i;j<=N;j+=i)
-        {
-            dp[j]=min(dp[j],i+j/i);
-        }
-
-    }
-
-    for(ll i=1;i<=N;i++)
-    {
-         for(ll j=1;j*j<=i;j++)
-         {
-              dp[i]=min(dp[i],dp[j]+dp[i-j]);
-         }
-    }
-
-}
 
 int main()
 {
     fast
     ll t = 1; 
     cin >> t;
-    solve();
-
     while (t--)
     {
-        ll n,k,x;
-        cin>>n>>k>>x;
-       // cout<<dp[k]<<endl;
-
-        if(dp[k]<=n) cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
+        ll n;
+        cin>>n;
+        ll ans=-1;
+        ll mx=-1;
 
 
+        for(ll i=1;i<=n;i++)
+        {
+           cin>>a[i];
+           mx=max(mx,a[i]);
+        }
+
+        for(ll i=1;i<=n;i++)
+        {
+             if(a[i]==mx)
+             {
+                 if(i-1>=1 && a[i-1]<a[i]) 
+                 {
+                     ans=i;
+                     break;
+                 }
+                 if(i+1<=n && a[i+1]<a[i]) 
+                 {
+                     ans=i;
+                     break;
+                 }
+             }
+        }
+
+        cout<<ans<<endl;
+        
         
     }
 return 0;
